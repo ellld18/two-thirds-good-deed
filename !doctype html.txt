@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>שני שליש מעשה טוב</title>
+  <style>
+    :root{
+      --bg:#fff9fd;
+      --bg2:#f1fbff;
+      --card:#ffffffcc;
+      --text:#1b1b2a;
+      --muted:#5a5a75;
+      --border:rgba(0,0,0,.08);
+      --pink:#ff4fa0;
+      --blue:#32c6ff;
+      --mint:#38d39f;
+      --shadow:0 14px 32px rgba(20,10,40,.12);
+      --r:18px;
+      --max:980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 480px at 85% -10%, rgba(255,79,160,.20), transparent 60%),
+        radial-gradient(900px 520px at 10% 0%, rgba(50,198,255,.18), transparent 55%),
+        radial-gradient(900px 520px at 50% 110%, rgba(56,211,159,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      min-height:100vh;
+    }
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px}
+    header{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.65);
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+    .top{display:flex; gap:12px; align-items:center; justify-content:space-between}
+    .brand{display:flex; gap:12px; align-items:center}
+    .mark{
+      width:42px; height:42px; border-radius:16px;
+      background: conic-gradient(from 210deg, var(--pink), var(--blue), var(--mint), var(--pink));
+      box-shadow: var(--shadow);
+    }
+    .brand h1{margin:0; font-size:18px}
+    .brand p{margin:2px 0 0; color:var(--muted); font-size:13px}
+    .chip{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.7);
+      padding:9px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+      white-space:nowrap;
+    }
+    .chip:hover{transform: translateY(-1px)}
+    .hero{
+      margin-top:14px;
+      background: var(--card);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding:14px;
+    }
+    .hero h2{margin:0 0 6px; font-size:26px; line-height:1.15}
+    .hero p{margin:0; color:var(--muted)}
+    .grid{display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-top:14px}
+    .card{
+      background: var(--card);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding:14px;
+    }
+    h3{margin:0 0 10px; font-size:16px}
+    label{display:block; margin:10px 0 6px; font-size:13px; color:var(--muted)}
+    input, textarea, select{
+      width:100%;
+      padding:11px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.85);
+      outline:none;
+      font: inherit;
+    }
+    textarea{min-height:90px; resize:vertical}
+    .row{display:grid; grid-template-columns: 1fr 1fr; gap:10px}
+    .btns{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    button{
+      border:0;
+      padding:11px 13px;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:900;
+      font: inherit;
+    }
+    .primary{
+      color:white;
+      background: linear-gradient(135deg, var(--pink), var(--blue));
+      box-shadow: var(--shadow);
+    }
+    .ghost{
+      background: rgba(255,255,255,.7);
+      border:1px solid var(--border);
+      color: var(--text);
+    }
+    .hint{margin-top:10px; font-size:12px; color:var(--muted)}
+
+    .toolbar{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+      margin-bottom:10px;
+    }
+    .pill{
+      display:inline-flex; gap:8px; align-items:center;
+      padding:7px 10px; border-radius:999px;
+      background: rgba(255,255,255,.7);
+      border:1px solid var(--border);
+      font-size:12px; color:var(--muted);
+    }
+    .controls{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .list{display:grid; gap:10px}
+    .item{
+      background: rgba(255,255,255,.75);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:16px;
+      padding:12px;
+    }
+    .itemTop{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(56,211,159,.14);
+      border:1px solid rgba(56,211,159,.25);
+      color:#1c6b56;
+      white-space:nowrap;
+    }
+    .meta{margin-top:6px; color:var(--muted); font-size:12px}
+    .actions{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; align-items:center}
+    .mini{
+      padding:8px 10px;
+      border-radius:12px;
+      background: rgba(255,255,255,.7);
+      border:1px solid var(--border);
+      cursor:pointer;
+      font-weight:800;
+      font-size:13px;
+    }
+    .mini.danger{border-color: rgba(255,79,160,.35); background: rgba(255,79,160,.08)}
+    .mini.like{
+      display:inline-flex; gap:8px; align-items:center;
+      border-color: rgba(255,79,160,.22);
+      background: rgba(255,79,160,.08);
+    }
+    .mini.like.on{
+      background: linear-gradient(135deg, rgba(255,79,160,.20), rgba(50,198,255,.16));
+      border-color: rgba(255,79,160,.35);
+    }
+    .toast{
+      position: fixed;
+      left: 14px; bottom: 14px;
+      background: rgba(255,255,255,.88);
+      border:1px solid rgba(0,0,0,.10);
+      box-shadow: var(--shadow);
+      padding:10px 12px;
+      border-radius: 14px;
+      color: var(--text);
+      font-weight: 800;
+      opacity:0;
+      transform: translateY(8px);
+      transition: .18s ease;
+      pointer-events:none;
+    }
+    .toast.show{opacity:1; transform: translateY(0)}
+    footer{padding:18px 0 28px; color:var(--muted); font-size:12px}
+
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr}
+      .row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <div class="brand">
+      <div class="mark" aria-hidden="true"></div>
+      <div>
+        <h1>שני שליש מעשה טוב</h1>
+        <p>המעשים הם העיקר · מוסיפים, רואים, נותנים לב 💗 ומשתפים</p>
+      </div>
+    </div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
+      <button class="chip" onclick="scrollToId('add')">הוסף מעשה</button>
+      <button class="chip" onclick="scrollToId('list')">רשימת מעשים</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h2>מעשה טוב אחד — מצטרף לעוד רבים ✨</h2>
+    <p>
+      כאן מוסיפים מעשים טובים, רואים מה כבר נעשה, מקבלים רעיונות —
+      ונותנים “לב” למעשים שנותנים השראה.
+    </p>
+  </section>
+
+  <section class="grid">
+    <section class="card" id="add">
+      <h3>הוספת מעשה טוב</h3>
+
+      <label>קטגוריה</label>
+      <select id="category">
+        <option value="חסד">חסד</option>
+        <option value="תפילה">תפילה</option>
+        <option value="צדקה">צדקה</option>
+        <option value="כיבוד הורים">כיבוד הורים</option>
+        <option value="שמירת הלשון">שמירת הלשון</option>
+        <option value="התנדבות">התנדבות</option>
+        <option value="אחר">אחר</option>
+      </select>
+
+      <label>תיאור המעשה</label>
+      <textarea id="deedText" placeholder="למשל: עזרתי לשכן עם הקניות / תרמתי בסתר / שיחת עידוד למישהו..."></textarea>
+
+      <div class="row">
+        <div>
+          <label>מוקדש עבור (אופציונלי)</label>
+          <input id="dedicatedTo" placeholder="שם / כינוי (לא חובה)" />
+        </div>
+        <div>
+          <label>שם פרטי שלך (אופציונלי)</label>
+          <input id="yourName" placeholder="אפשר להשאיר ריק" />
+        </div>
+      </div>
+
+      <div class="btns">
+        <button class="primary" onclick="addDeed()">הוסף לרשימה</button>
+        <button class="ghost" onclick="fillRandomIdea()">תן לי רעיון</button>
+      </div>
+
+      <div class="hint">כרגע נשמר בדפדפן שלך. כשתרצה — נחבר לשיתוף אמיתי בין כולם.</div>
+    </section>
+
+    <section class="card" id="list">
+      <div class="toolbar">
+        <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+          <h3 style="margin:0">רשימת מעשים</h3>
+          <span class="pill" id="countPill">0 מעשים</span>
+        </div>
+        <div class="controls">
+          <input type="search" id="q" placeholder="חיפוש..." oninput="render()" />
+          <select id="filterCat" onchange="render()">
+            <option value="">כל הקטגוריות</option>
+            <option>חסד</option><option>תפילה</option><option>צדקה</option>
+            <option>כיבוד הורים</option><option>שמירת הלשון</option><option>התנדבות</option><option>אחר</option>
+          </select>
+          <select id="sortBy" onchange="render()">
+            <option value="new">מיון: החדשים</option>
+            <option value="top">מיון: הכי אהובים</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="list" id="items"></div>
+
+      <div class="btns" style="margin-top:12px">
+        <button class="ghost" onclick="exportJson()">ייצוא (JSON)</button>
+        <button class="ghost" onclick="importJson()">ייבוא (JSON)</button>
+        <button class="ghost" onclick="clearAll()">נקה הכל</button>
+      </div>
+      <div class="hint">ה”לב” נשמר אצלך בדפדפן (כרגע). כשיהיה שרת — זה יהיה גלובלי לכולם.</div>
+    </section>
+  </section>
+
+  <footer>
+    © <span id="year"></span> שני שליש מעשה טוב
+  </footer>
+</div>
+
+<div class="toast" id="toast">הועתק לשיתוף ✅</div>
+
+<script>
+  const KEY = "two_thirds_good_deed_list_v2";
+  const LIKED_KEY = "two_thirds_good_deed_liked_v2"; // שומר “אהבתי” מקומי
+
+  const IDEAS = [
+    {cat:"חסד", text:"להתקשר למישהו בודד/ה ולשמוע מה שלומו באמת."},
+    {cat:"צדקה", text:"להפריש סכום קטן לצדקה בסתר."},
+    {cat:"התנדבות", text:"לעזור לשכן/ה עם קניות או סידור קטן."},
+    {cat:"שמירת הלשון", text:"יום אחד להשתדל במיוחד לדבר טוב ולהימנע מרכילות."},
+    {cat:"כיבוד הורים", text:"לבקר/להתקשר להורה ולתת הקשבה מלאה."},
+    {cat:"תפילה", text:"להקדיש תפילה קצרה/תהילים בכוונה טובה."},
+    {cat:"חסד", text:"להשאיר פתק עידוד אנונימי למישהו שצריך."},
+    {cat:"התנדבות", text:"לעזור למישהו להתכונן לראיון/לימוד/משימה."},
+  ];
+
+  function scrollToId(id){
+    document.getElementById(id)?.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  function load(){
+    try{
+      const raw = localStorage.getItem(KEY);
+      const arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    }catch{ return []; }
+  }
+  function save(arr){ localStorage.setItem(KEY, JSON.stringify(arr)); }
+
+  function loadLiked(){
+    try{
+      const raw = localStorage.getItem(LIKED_KEY);
+      const obj = raw ? JSON.parse(raw) : {};
+      return (obj && typeof obj === "object") ? obj : {};
+    }catch{ return {}; }
+  }
+  function saveLiked(obj){ localStorage.setItem(LIKED_KEY, JSON.stringify(obj)); }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, s => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[s]));
+  }
+  function formatDate(iso){
+    try{
+      return new Date(iso).toLocaleDateString("he-IL", {year:"numeric", month:"short", day:"numeric"});
+    }catch{ return ""; }
+  }
+
+  function showToast(text){
+    const t = document.getElementById("toast");
+    t.textContent = text;
+    t.classList.add("show");
+    setTimeout(()=>t.classList.remove("show"), 1100);
+  }
+
+  function addDeed(){
+    const category = document.getElementById("category").value;
+    const deedText = document.getElementById("deedText").value.trim();
+    const dedicatedTo = document.getElementById("dedicatedTo").value.trim();
+    const yourName = document.getElementById("yourName").value.trim();
+
+    if(!deedText){
+      alert("רק תיאור המעשה חובה 🙂");
+      return;
+    }
+
+    const arr = load();
+    arr.unshift({
+      id: (crypto.randomUUID?.() ?? String(Date.now()) + Math.random()),
+      category,
+      deedText,
+      dedicatedTo,
+      yourName,
+      likes: 0,
+      createdAt: new Date().toISOString()
+    });
+    save(arr);
+
+    document.getElementById("deedText").value = "";
+    document.getElementById("dedicatedTo").value = "";
+    document.getElementById("yourName").value = "";
+
+    render();
+    scrollToId("list");
+  }
+
+  function removeDeed(id){
+    if(!confirm("למחוק את המעשה מהרשימה?")) return;
+    const arr = load().filter(x => x.id !== id);
+    save(arr);
+
+    // גם להסיר “אהבתי” מקומי אם יש
+    const liked = loadLiked();
+    delete liked[id];
+    saveLiked(liked);
+
+    render();
+  }
+
+  function toggleLike(id){
+    const arr = load();
+    const liked = loadLiked();
+
+    const idx = arr.findIndex(x => x.id === id);
+    if(idx === -1) return;
+
+    const isOn = !!liked[id];
+
+    if(isOn){
+      liked[id] = false;
+      arr[idx].likes = Math.max(0, (arr[idx].likes || 0) - 1);
+    }else{
+      liked[id] = true;
+      arr[idx].likes = (arr[idx].likes || 0) + 1;
+    }
+
+    saveLiked(liked);
+    save(arr);
+    render(false); // לא לגלול למעלה
+  }
+
+  function buildShareText(x){
+    const lines = [];
+    lines.push("שני שליש מעשה טוב ✨");
+    lines.push("");
+    lines.push("מעשה טוב:");
+    lines.push(x.deedText);
+    lines.push("");
+    lines.push(`קטגוריה: ${x.category}`);
+    if(x.dedicatedTo) lines.push(`מוקדש עבור: ${x.dedicatedTo}`);
+    lines.push(`לבבות: ${x.likes || 0} 💗`);
+    lines.push(`תאריך: ${formatDate(x.createdAt)}`);
+    if(x.yourName) lines.push(`מאת: ${x.yourName}`);
+    return lines.join("\n");
+  }
+
+  async function copyShare(id){
+    const x = load().find(d => d.id === id);
+    if(!x) return;
+    const text = buildShareText(x);
+
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast("הועתק לשיתוף ✅");
+    }catch{
+      // fallback פשוט
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+      showToast("הועתק לשיתוף ✅");
+    }
+  }
+
+  function render(keepScroll=true){
+    const all = load();
+    const liked = loadLiked();
+
+    const q = document.getElementById("q").value.trim().toLowerCase();
+    const filterCat = document.getElementById("filterCat").value;
+    const sortBy = document.getElementById("sortBy").value;
+
+    let arr = all.filter(x => {
+      if(filterCat && x.category !== filterCat) return false;
+      if(!q) return true;
+      const hay = `${x.category} ${x.deedText} ${x.dedicatedTo||""} ${x.yourName||""}`.toLowerCase();
+      return hay.includes(q);
+    });
+
+    if(sortBy === "top"){
+      arr = arr.slice().sort((a,b) => (b.likes||0) - (a.likes||0) || (new Date(b.createdAt) - new Date(a.createdAt)));
+    }else{
+      arr = arr.slice().sort((a,b) => (new Date(b.createdAt) - new Date(a.createdAt)));
+    }
+
+    document.getElementById("countPill").textContent = `${arr.length} מעשים`;
+    document.getElementById("year").textContent = String(new Date().getFullYear());
+
+    const box = document.getElementById("items");
+    box.innerHTML = "";
+
+    if(arr.length === 0){
+      const empty = document.createElement("div");
+      empty.className = "item";
+      empty.innerHTML = `
+        <div class="itemTop">
+          <h3 style="margin:0">עדיין אין מעשים כאן</h3>
+          <span class="tag">בוא/י נתחיל</span>
+        </div>
+        <div class="meta">הוסף/י מעשה טוב ראשון בצד שמאל 👈</div>
+      `;
+      box.appendChild(empty);
+      return;
+    }
+
+    arr.forEach(x => {
+      const div = document.createElement("div");
+      div.className = "item";
+
+      const when = formatDate(x.createdAt);
+      const isOn = !!liked[x.id];
+
+      div.innerHTML = `
+        <div class="itemTop">
+          <div>
+            <h3 style="margin:0">${escapeHtml(x.deedText)}</h3>
+            <div class="meta">
+              <span class="tag" style="background: rgba(50,198,255,.12); border-color: rgba(50,198,255,.22); color:#0f5e7a">${escapeHtml(x.category)}</span>
+              &nbsp;·&nbsp;${when}
+              ${x.dedicatedTo ? `&nbsp;·&nbsp;מוקדש ל־${escapeHtml(x.dedicatedTo)}` : ""}
+              ${x.yourName ? `&nbsp;·&nbsp;מאת ${escapeHtml(x.yourName)}` : ""}
+            </div>
+          </div>
+          <span class="tag">💗 ${(x.likes||0)}</span>
+        </div>
+
+        <div class="actions">
+          <button class="mini like ${isOn ? "on" : ""}" onclick="toggleLike(${JSON.stringify(x.id)})">
+            💗 <span>${isOn ? "אהבתי" : "תן לב"}</span> · ${(x.likes||0)}
+          </button>
+          <button class="mini" onclick="copyShare(${JSON.stringify(x.id)})">העתק לשיתוף</button>
+          <button class="mini danger" onclick="removeDeed(${JSON.stringify(x.id)})">מחק</button>
+        </div>
+      `;
+
+      box.appendChild(div);
+    });
+
+    if(!keepScroll) return;
+  }
+
+  function fillRandomIdea(){
+    const pick = IDEAS[Math.floor(Math.random() * IDEAS.length)];
+    document.getElementById("category").value = pick.cat;
+    document.getElementById("deedText").value = pick.text;
+    document.getElementById("deedText").focus();
+  }
+
+  function clearAll(){
+    if(confirm("למחוק את כל הנתונים שנשמרו בדפדפן?")){
+      localStorage.removeItem(KEY);
+      localStorage.removeItem(LIKED_KEY);
+      render();
+    }
+  }
+
+  function exportJson(){
+    const data = JSON.stringify(load(), null, 2);
+    navigator.clipboard?.writeText(data);
+    alert("הנתונים הועתקו ללוח (וגם מוצגים בקונסול).");
+    console.log(data);
+  }
+
+  function importJson(){
+    const raw = prompt("הדבק כאן JSON שהתקבל מייצוא:");
+    if(!raw) return;
+    try{
+      const arr = JSON.parse(raw);
+      if(!Array.isArray(arr)) throw new Error("not array");
+      // דאגה לשדות שחסרים
+      const normalized = arr.map(x => ({
+        id: x.id ?? (crypto.randomUUID?.() ?? String(Date.now()) + Math.random()),
+        category: x.category ?? "אחר",
+        deedText: x.deedText ?? "",
+        dedicatedTo: x.dedicatedTo ?? "",
+        yourName: x.yourName ?? "",
+        likes: Number.isFinite(x.likes) ? x.likes : 0,
+        createdAt: x.createdAt ?? new Date().toISOString()
+      })).filter(x => x.deedText.trim().length > 0);
+
+      save(normalized);
+      render();
+      alert("יובא בהצלחה ✅");
+    }catch{
+      alert("זה לא נראה כמו JSON תקין של האתר.");
+    }
+  }
+
+  render();
+</script>
+</body>
+</html>
